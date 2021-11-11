@@ -10,21 +10,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {Link} from 'react-router-dom'
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 
 
 class Signup extends React.Component {
@@ -45,7 +30,7 @@ handleFetch = (event) =>  {
     headers: {
       'Content-Type': 'application/json'
     },
-  body: JSON.stringify({user:{...this.state, userName: this.state.email}})
+  body: JSON.stringify({user:{...this.state, userName: this.state.email, firstName: this.state.firstName, lastName: this.state.lastName, passwordhash: this.state.password}})
   })
   .then(response=> response.json())
   .then(data=> {
@@ -162,16 +147,9 @@ handlePassword = (event) => {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to='/'>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
       
   )

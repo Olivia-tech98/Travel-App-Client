@@ -1,29 +1,49 @@
 import './App.css';
 // import Signup from './components/Signup'
-// import Login from './components/Login'
-import {useState} from 'react'
-import Auth from './components/Auth'
-import {Switch, BrowserRouter as Router} from 'react-router-dom'
+// import Login from './components/Auth/Login'
+import React from 'react'
+import Auth from './components/Auth/Auth'
+import {BrowserRouter as Router} from 'react-router-dom'
+// import HomeIndex from './components/HomeIndex/Home'
+import CountryIndex from "./components/Countries/CountryIndex"
+import Navbar from './components/HomeIndex/Navbar'
+// import SecondPage from './components/HomeIndex/SecondPage'
 
 
-function App() {
-  const [sessionToken, setSessionToken] = useState('')
 
-  const updateToken= (newToken) => {
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={
+      sessionToken: ''
+    }
+  }
+
+  componentDidMount(){
+    if(localStorage.getItem('sessionToken')){
+      this.setState({sessionToken:localStorage.getItem('sessionToken')})
+    }
+  }
+
+    updateToken= (newToken) => {
     if(newToken===undefined) {
       return
     }else{
       localStorage.setItem('sessionToken', newToken)
-      setSessionToken(newToken)
+      this.setState({sessionToken: newToken})
     }
   }
-  return ( 
-  <Router>
-  <Switch >
-  <Auth updateToken={updateToken} />
-   </Switch>
-  </Router>
 
-  )}
+  render (){
+    return ( 
+      <div>
+      <Router>
+          {this.state.sessionToken ? <CountryIndex sessionToken={this.state.sessionToken}/> : <Auth updateToken={this.updateToken}/>}
+      </Router>
+      <Navbar />
+      </div>
+      )}
+  }
+ 
 
 export default App;
