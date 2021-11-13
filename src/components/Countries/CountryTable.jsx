@@ -57,32 +57,15 @@ export default class CountryTable extends React.Component {
                 </Typography>
               </CardContent>
               <CardActions>
+                <Button onClick={()=>{
+                  this.props.handleReviewOpen()
+                  this.props.reviewToCreate(country)
+                }}>Leave Review</Button>
                 <Button size="small" href="/SecondPage">View</Button>
                 <Button size="small">Edit</Button>
               </CardActions>
-              {/* <Link to="/SecondPage">View</Link> */}
             </Card>
           </Grid>
-          //  <div>
-          //      <p>
-          //       {country.countryName}
-          //   </p>
-          //   <p>
-          //       {country.population}
-          //   </p>
-          //   <p>
-          //       {country.history}
-          //   </p>
-          //   <p>
-          //       {country.attractions}
-          //   </p>
-          //   <p>
-          //       {country.languages}
-          //   </p>
-          //   <p>
-          //       {country.safteyRates}
-          //   </p>
-          //   </div>
         ))}
       </div>
     );

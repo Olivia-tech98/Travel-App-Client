@@ -1,5 +1,4 @@
 import React from 'react'
-import ReviewCreate from './ReviewCreate';
 import { Button } from '@mui/material';
 import CountryIndex from '../Countries/CountryIndex';
 
@@ -9,6 +8,10 @@ class ReviewIndex extends React.Component {
         this.state={}
     }
 
+
+    componentWillMount() {
+        this.handleFetch();
+      }
 
 
     handleClose = () => {
@@ -20,6 +23,25 @@ class ReviewIndex extends React.Component {
           this.setState({open: true})
       }
 
+      componentDidMount() {
+        this.fetchReviews()
+    }
+
+      handleFetch = () => {
+        fetch('http://localhost:3000/review/get', {
+            method: 'GET',
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.props.sessionToken,
+            }),
+        })
+        .then((res)=> res.json())
+        .then((getData)=> {
+            this.setState({reviews: getData});
+        })
+      }
+
+
     render (){
         return(
             <div>
@@ -28,7 +50,7 @@ class ReviewIndex extends React.Component {
         <br/>
         <br/>
         <Button onClick={() => this.handleOpen()}>Leave Review</Button>
-                <ReviewCreate />
+                {/* <ReviewCreate sessionToken={this.props.sessionToken} handleClose={this.handleClose.bind(this)} handleFetch={this.handleFetch} open={this.state.open} /> */}
                 <CountryIndex />
             </div>
         )

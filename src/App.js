@@ -40,7 +40,7 @@ class App extends React.Component {
       <Router>
           {this.state.sessionToken ? <CountryIndex sessionToken={this.state.sessionToken}/> : <Auth updateToken={this.updateToken}/>}
       </Router>
-      <Navbar />
+      <Navbar clearToken={this.state.clearToken}/>
       </div>
       )}
   }

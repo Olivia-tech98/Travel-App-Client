@@ -5,6 +5,7 @@ import { Route, Switch} from "react-router-dom";
 import CountryCreate from "./CountryCreate";
 import CountryEdit from "./CountryEdit";
 import { Container, Button } from "@mui/material";
+import ReviewCreate from "../Reviews/ReviewCreate";
 
 export default class CountryIndex extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ export default class CountryIndex extends React.Component {
       open:false,
       updatePressed: false,
       countryToUpdate: {},
+      countryToReview: {},
+      reviewActive: false
     };
   }
 
@@ -68,6 +71,16 @@ export default class CountryIndex extends React.Component {
       this.setState({open: true})
   }
 
+
+  handleReviewOpen = () => {
+    this.setState({reviewActive: true})
+}
+
+
+  reviewToCreate = (country) => {
+    this.setState({countryToReview: country})
+  }
+
   handleFetch = () => {
     fetch("http://localhost:3000/country/getAll", {
       method: "GET",
@@ -111,6 +124,8 @@ export default class CountryIndex extends React.Component {
         <Switch> 
           <Route exact path="/">
             <CountryTable
+            handleReviewOpen={this.handleReviewOpen}
+            reviewToCreate={this.reviewToCreate}
             countryDelete={this.countryDelete}
               token={this.props.sessionToken}
               t={this.state.updatePressed}
@@ -124,6 +139,9 @@ export default class CountryIndex extends React.Component {
             <SecondPage countries={this.state.countries} />
           </Route>
         </Switch>
+        {this.state.reviewActive && (
+               <ReviewCreate sessionToken={this.props.sessionToken} countryToReview={this.state.countryToReview}/> 
+        )}
       </div>
             //   </div>
     );

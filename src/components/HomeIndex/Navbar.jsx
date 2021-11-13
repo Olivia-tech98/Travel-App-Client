@@ -11,6 +11,10 @@ class Navbar extends React.Component {
     this.state = {};
   }
 
+  clearToken = () => {
+    localStorage.clear()
+  }
+
   render() {
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -19,7 +23,9 @@ class Navbar extends React.Component {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Travel App
             </Typography>
-            <Button color="inherit">Logout</Button>
+            <Button href="/" onClick={()=> {
+              this.clearToken();
+            }} color="inherit">Logout</Button>
           </Toolbar>
         </AppBar>
       </Box>
