@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/material";
 import{Box, Modal, IconButton} from  "@mui/material";
+import APIURL from "../helpers/enviroment";
 // import Box from "@mui/material/Box";
 
 class CountryCreate extends React.Component {
@@ -31,7 +32,7 @@ class CountryCreate extends React.Component {
     event.preventDefault();
     //surround this with a conditional that checks to see if the user is an admin or not.
     console.log('hello')
-    fetch("http://localhost:3000/country/create", {
+    fetch(`${APIURL}/country/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

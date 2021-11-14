@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Container, Modal, IconButton } from "@mui/material";
+import APIURL from "../helpers/enviroment";
 
 class ReviewCreate extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class ReviewCreate extends React.Component {
   handleFetch = (event) => {
     event.preventDefault();
     fetch(
-      `http://localhost:3000/review/create/${this.props.countryToReview.id}`,
+      `${APIURL}/review/create/${this.props.countryToReview.id}`,
       {
         method: "POST",
         headers: {

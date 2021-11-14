@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import APIURL from '../helpers/enviroment';
 
 
 class Signup extends React.Component {
@@ -25,7 +26,7 @@ componentDidMount() {
 handleFetch = (event) =>  {
   event.preventDefault()
   console.log(this.state.firstName)
-  fetch('http://localhost:3000/user/signup', {
+  fetch(`${APIURL}/user/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

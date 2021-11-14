@@ -6,6 +6,7 @@ import CountryCreate from "./CountryCreate";
 import CountryEdit from "./CountryEdit";
 import { Container, Button } from "@mui/material";
 import ReviewCreate from "../Reviews/ReviewCreate";
+import APIURL from "../helpers/enviroment";
 
 export default class CountryIndex extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class CountryIndex extends React.Component {
 
   countryDelete = (event) => {
       console.log(event)
-      fetch(`http://localhost:3000/country/delete/${event.target.id}`, {
+      fetch(`${APIURL}/country/delete/${event.target.id}`, {
           method:'DELETE',
           body: JSON.stringify({data: {id: event.target.id} }),
           headers: new Headers({
@@ -38,7 +39,7 @@ export default class CountryIndex extends React.Component {
 
 
   countryUpdate = (event, country) => {
-    fetch(`http://localhost:3000/country/update/${country.id}`, {
+    fetch(`${APIURL}/country/update/${country.id}`, {
       method: "PUT",
       body: JSON.stringify({ data: country }),
       headers: new Headers({
@@ -82,7 +83,7 @@ export default class CountryIndex extends React.Component {
   }
 
   handleFetch = () => {
-    fetch("http://localhost:3000/country/getAll", {
+    fetch(`${APIURL}/country/getAll`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

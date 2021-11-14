@@ -1,6 +1,6 @@
 import React from 'react'
 import CountryIndex from '../Countries/CountryIndex';
-
+import APIURL from '../helpers/enviroment';
 class ReviewIndex extends React.Component {
     constructor(props){
         super(props)
@@ -31,7 +31,7 @@ class ReviewIndex extends React.Component {
     }
 
       handleFetch = () => {
-        fetch('http://localhost:3000/review/get', {
+        fetch(`${APIURL}/review/get`, {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ class ReviewIndex extends React.Component {
       }
 
       reviewToUpdate = (event, reviews) => {
-          fetch(`http://localhost:3000/review/update/${this.props.countryToReviewUpdate.id}`, {
+          fetch(`${APIURL}/review/update/${this.props.countryToReviewUpdate.id}`, {
               method: 'PUT',
               body:JSON.stringify({update: reviews}),
               headers: new Headers({

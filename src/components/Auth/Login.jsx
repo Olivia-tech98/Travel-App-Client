@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import APIURL from '../helpers/enviroment';
 // import {Link} from 'react-router-dom'
 
 
@@ -29,7 +30,7 @@ class Login extends React.Component {
 
     handleFetch = (event) => {
         event.preventDefault()
-        fetch('http://localhost:3000/user/login', {
+        fetch(`${APIURL}/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
