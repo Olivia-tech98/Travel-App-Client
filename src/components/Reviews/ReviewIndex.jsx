@@ -1,11 +1,14 @@
 import React from 'react'
-import { Button } from '@mui/material';
 import CountryIndex from '../Countries/CountryIndex';
 
 class ReviewIndex extends React.Component {
     constructor(props){
         super(props)
-        this.state={}
+        this.state={
+            reviews:[],
+            updatePressed: false,
+            reviewToUpdate: {}
+        }
     }
 
 
@@ -41,6 +44,21 @@ class ReviewIndex extends React.Component {
         })
       }
 
+      reviewToUpdate = (event, reviews) => {
+          fetch(`http://localhost:3000/review/update/${this.props.countryToReviewUpdate.id}`, {
+              method: 'PUT',
+              body:JSON.stringify({update: reviews}),
+              headers: new Headers({
+                  'Content-Type' : 'application/json',
+                  'Authorization' : this.props.sessionToken
+              })
+          })
+          .then((res)=> {
+              this.setState({updatePressed: false})
+              this.fetchReviews()
+          })
+      }
+
 
     render (){
         return(
@@ -49,7 +67,7 @@ class ReviewIndex extends React.Component {
         <br/>
         <br/>
         <br/>
-        <Button onClick={() => this.handleOpen()}>Leave Review</Button>
+        {/* <Button onClick={() => this.handleOpen()}>Leave Review</Button> */}
                 {/* <ReviewCreate sessionToken={this.props.sessionToken} handleClose={this.handleClose.bind(this)} handleFetch={this.handleFetch} open={this.state.open} /> */}
                 <CountryIndex />
             </div>

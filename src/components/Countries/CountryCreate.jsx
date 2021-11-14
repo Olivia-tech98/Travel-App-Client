@@ -109,20 +109,6 @@ class CountryCreate extends React.Component {
               variant="outlined"
               required
             />
-            {/* <TextField
-              accept="image/*"
-              autoFocus
-              // value={this.state.photo_url}
-              margin="dense"
-              onChange={this.uploadImage}
-              id="upload button"
-              name="photo_url"
-              label="Upload Photo"
-              type="file"
-              fullWidth
-              variant="outlined"
-              required
-            /> */}
             <TextField
               fullWidth
               value={this.state.population}
