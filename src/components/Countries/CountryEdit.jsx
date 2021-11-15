@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/material";
 import{Box, Modal, IconButton} from  "@mui/material";
+import APIURL from '../helpers/enviroment'
 
 class CountryEdit extends React.Component {
     constructor(props){
@@ -43,6 +44,21 @@ class CountryEdit extends React.Component {
         this.props.update(event, this.state)
     }
 
+
+    countryUpdate = (event) => {
+      fetch(`${APIURL}/country/update/${this.state.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ country: {...this.state} }),
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: this.props.sessionToken,
+        }),
+      }).then((res) => {
+        this.props.setUpdatePressed(false);
+        this.fetchCountries();
+      });
+    };
+
     render(){
         return(
             <div>
@@ -70,7 +86,7 @@ class CountryEdit extends React.Component {
           >
             <Box
               component="form"
-              onSubmit={this.handleSubmit}
+              onSubmit={this.countryUpdate}
               sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
             >
               <IconButton
@@ -95,20 +111,6 @@ class CountryEdit extends React.Component {
               variant="outlined"
               required
             />
-            {/* <TextField
-              accept="image/*"
-              autoFocus
-              // value={this.state.photo_url}
-              margin="dense"
-              onChange={this.uploadImage}
-              id="upload button"
-              name="photo_url"
-              label="Upload Photo"
-              type="file"
-              fullWidth
-              variant="outlined"
-              required
-            /> */}
             <TextField
               fullWidth
               value={this.state.population}
@@ -206,7 +208,7 @@ class CountryEdit extends React.Component {
                   id="modal-description"
                   color="secondary"
                   variant="contained"
-                  onClick={() => this.props.handleClose()}
+                  onClick={() => this.props.setUpdatePressed(false)}
                 >
                   Cancel
                 </Button>

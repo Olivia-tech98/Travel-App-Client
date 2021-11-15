@@ -38,26 +38,20 @@ export default class CountryIndex extends React.Component {
   }
 
 
-  countryUpdate = (event, country) => {
-    fetch(`${APIURL}/country/update/${country.id}`, {
-      method: "PUT",
-      body: JSON.stringify({ data: country }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Auhtorization: this.props.sessionToken,
-      }),
-    }).then((res) => {
-      this.setState({ updatePressed: false });
-      this.fetchCountries();
-    });
-  };
 
-  setUpdateCountry = (event, country) => {
+
+  setUpdateCountry = (country) => {
     this.setState({
       countryToUpdate: country,
       updatePressed: true,
     });
   };
+
+  setUpdatePressed = (boolean) => {
+    this.setState({
+      updatePressed: boolean
+    })
+  } 
 
   componentWillMount() {
     this.handleFetch();
@@ -109,7 +103,7 @@ export default class CountryIndex extends React.Component {
         <br/>
         <br/>
      <Button onClick={() => this.handleOpen()}>Add Country</Button>
-     <Button onClick={() => this.handleOpen()}>Edit Country</Button>
+     {/* <Button onClick={() => this.handleOpen()}>Edit Country</Button> */}
      {/* <Button onClick={() => this.handleOpen()}>Delete Country</Button> */}
           <Container>
               {this.state.open ? 
@@ -118,7 +112,7 @@ export default class CountryIndex extends React.Component {
           </Container>
                 <Container>
                     {
-                         this.state.updatePressed ? <CountryEdit t={this.state.updatePressed} update={this.countryUpdate} country={this.state.countryToUpdate} /> 
+                         this.state.updatePressed ? <CountryEdit t={this.state.updatePressed} update={this.countryUpdate} country={this.state.countryToUpdate} setUpdatePressed={this.setUpdatePressed} sessionToken={this.props.sessionToken}/> 
                          : <div></div>
                     }
                 </Container>
@@ -134,6 +128,8 @@ export default class CountryIndex extends React.Component {
               country={this.state.countryToUpdate}
               updateCountryArray={this.fetchCountries}
               countries={this.state.countries}
+              setUpdateCountry={this.setUpdateCountry}
+              setUpdatePressed={this.setUpdatePressed}
               />
           </Route>
           <Route exact path="/SecondPage">

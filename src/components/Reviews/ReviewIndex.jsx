@@ -1,13 +1,16 @@
 import React from 'react'
 import CountryIndex from '../Countries/CountryIndex';
 import APIURL from '../helpers/enviroment';
+import CountryTable from './CountryTable';
+
 class ReviewIndex extends React.Component {
     constructor(props){
         super(props)
         this.state={
             reviews:[],
             updatePressed: false,
-            reviewToUpdate: {}
+            reviewToUpdate: {},
+            review: ""
         }
     }
 
@@ -60,6 +63,21 @@ class ReviewIndex extends React.Component {
       }
 
 
+      reviewDelete = (event) => {
+        fetch(`${APIURL}/review/delete/${event.target.id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({review: {id: event.target.id}}),
+            headers: new Headers({
+                'Content-Type' : 'application/json',
+                'Authorization' : this.props.sessionToken
+            })
+        })
+        .then((response)=>response.json())
+        .then(()=>this.setState({status: "Review Deleted"}));
+    }
+
+    
+
     render (){
         return(
             <div>
@@ -67,6 +85,9 @@ class ReviewIndex extends React.Component {
         <br/>
         <br/>
         <br/>
+        
+                <CountryTable
+                reviewDelete={this.reviewDelete} />
         {/* <Button onClick={() => this.handleOpen()}>Leave Review</Button> */}
                 {/* <ReviewCreate sessionToken={this.props.sessionToken} handleClose={this.handleClose.bind(this)} handleFetch={this.handleFetch} open={this.state.open} /> */}
                 <CountryIndex />
