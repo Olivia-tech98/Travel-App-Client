@@ -23,8 +23,7 @@ class ReviewCreate extends React.Component {
 
   handleFetch = (event) => {
     event.preventDefault();
-    fetch(
-      `${APIURL}/review/create/${this.props.countryToReview.id}`,
+    fetch(`${APIURL}/review/create/${this.props.countryToReview.id}`,
       {
         method: "POST",
         headers: {
@@ -34,14 +33,14 @@ class ReviewCreate extends React.Component {
         body: JSON.stringify({
           review: {
             reviews: this.state.reviews,
-            favorites: this.state.favorites,
+            // favorites: this.state.favorites,
           },
         }),
       }
     )
       .then((res) => res.json())
       .then((reviewData) => {
-        this.props.handleFetch();
+        // this.props.handleFetch();
         // this.props.updateReviewsArray();
         this.setState({
           countryId: "",
@@ -95,7 +94,7 @@ class ReviewCreate extends React.Component {
                   margin="dense"
                   onChange={(e) => this.setState({ reviews: e.target.value })}
                   id="title"
-                  name="title"
+                  name="reviews"
                   label="Leave a Review"
                   type="text"
                   fullWidth

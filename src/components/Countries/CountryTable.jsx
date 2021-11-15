@@ -55,6 +55,9 @@ export default class CountryTable extends React.Component {
                 <Typography>
                   {country.history}
                 </Typography>
+                {country.reviews.map((review)=>(
+                  <p>{review.reviews}</p>
+                ))}
               </CardContent>
               <CardActions>
                 <Button onClick={()=>{
