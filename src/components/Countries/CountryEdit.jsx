@@ -46,14 +46,25 @@ class CountryEdit extends React.Component {
 
 
     countryUpdate = (event) => {
-      fetch(`${APIURL}/country/update/${this.state.id}`, {
+      fetch(`${APIURL}/country/update/country/${this.state.id}`, {
         method: "PUT",
-        body: JSON.stringify({ country: {...this.state} }),
+        body: JSON.stringify({ 
+          country: {
+            countryName: this.state.countryName,
+            population: this.state.population,
+            history: this.state.history,
+            attractions: this.state.attractions,
+            languages: this.state.languages,
+            safteyRates: this.state.safetyRates,
+          },
+        }),
         headers: new Headers({
           "Content-Type": "application/json",
           Authorization: this.props.sessionToken,
         }),
-      }).then((res) => {
+      }).then((res) => res.json())
+     .then((data)=>{
+       console.log(data)
         this.props.setUpdatePressed(false);
         this.fetchCountries();
       });

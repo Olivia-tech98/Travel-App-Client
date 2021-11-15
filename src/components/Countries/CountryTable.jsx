@@ -72,7 +72,7 @@ export default class CountryTable extends React.Component {
                     <Button>Edit Review</Button>
                     <Button
                       onClick={() => {
-                        this.reviewDelete();
+                        this.props.reviewDelete(review);
                       }}
                     >
                       Delete Review

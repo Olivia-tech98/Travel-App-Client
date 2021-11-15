@@ -71,6 +71,10 @@ export default class CountryIndex extends React.Component {
     this.setState({reviewActive: true})
 }
 
+handleReviewClose = () => {
+  this.setState({reviewActive: false})
+}
+
 
   reviewToCreate = (country) => {
     this.setState({countryToReview: country})
@@ -89,6 +93,22 @@ export default class CountryIndex extends React.Component {
         this.setState({ countries: getData });
         console.log(getData);
       });
+  };
+
+
+  reviewDelete = (review) => {
+    fetch(`${APIURL}/review/delete/${review.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ status: "Review Deleted" })
+        this.handleFetch()
+      })
   };
 
   render() {
@@ -130,6 +150,7 @@ export default class CountryIndex extends React.Component {
               countries={this.state.countries}
               setUpdateCountry={this.setUpdateCountry}
               setUpdatePressed={this.setUpdatePressed}
+              reviewDelete={this.reviewDelete}
               />
           </Route>
           <Route exact path="/SecondPage">
@@ -137,7 +158,7 @@ export default class CountryIndex extends React.Component {
           </Route>
         </Switch>
         {this.state.reviewActive && (
-               <ReviewCreate sessionToken={this.props.sessionToken} countryToReview={this.state.countryToReview}/> 
+               <ReviewCreate sessionToken={this.props.sessionToken} countryToReview={this.state.countryToReview} handleFetch={this.handleFetch} handleReviewClose={this.handleReviewClose}/> 
         )}
       </div>
             //   </div>

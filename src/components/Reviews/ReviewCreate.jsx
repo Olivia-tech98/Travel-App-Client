@@ -40,7 +40,8 @@ class ReviewCreate extends React.Component {
     )
       .then((res) => res.json())
       .then((reviewData) => {
-        // this.props.handleFetch();
+        this.props.handleFetch();
+        this.props.handleReviewClose()
         // this.props.updateReviewsArray();
         this.setState({
           countryId: "",
@@ -118,7 +119,7 @@ class ReviewCreate extends React.Component {
                     id="modal-description"
                     color="secondary"
                     variant="contained"
-                    onClick={() => this.props.handleClose()}
+                    onClick={() => this.props.handleReviewClose()}
                   >
                     Cancel
                   </Button>
