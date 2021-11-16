@@ -52,7 +52,7 @@ export default class CountryTable extends React.Component {
                 sx={{
                   pt: "5.25%",
                 }}
-                image="https://www.varietycruises.com/images/cruises_in_between/spain_portugal/variety_cruises_slideshow_spain_3.jpg"
+                image="https://www.iabtravel.com/wp-content/uploads/2017/07/TURKEY-COUNTRY-IMAGE.jpg"
                 alt="random"
               />
               <Button
@@ -65,11 +65,27 @@ export default class CountryTable extends React.Component {
                 <Typography gutterBottom variant="h5" component="h2">
                   {country.countryName}
                 </Typography>
-                <Typography>{country.history}</Typography>
+                <Typography>
+                  {country.history}
+                </Typography>
+                <Typography>
+                  {country.population}
+                </Typography>
+                <Typography>
+                {country.attractions}
+              </Typography>
+              <Typography>
+                {country.languages}
+              </Typography>
+              <Typography>
+                {country.safteyRates}
+              </Typography>
                 {country.reviews.map((review) => (
                   <Box>
                     <p>{review.reviews}</p>
-                    <Button>Edit Review</Button>
+                    <Button onClick={()=> {
+                      this.props.reviewToUpdate(review)
+                    }}>Edit Review</Button>
                     <Button
                       onClick={() => {
                         this.props.reviewDelete(review);

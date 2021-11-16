@@ -1,7 +1,7 @@
 import React from "react";
 import CountryTable from "./CountryTable";
-import SecondPage from "../HomeIndex/SecondPage"
-import { Route, Switch} from "react-router-dom";
+import SecondPage from "../HomeIndex/SecondPage";
+import { Route, Switch } from "react-router-dom";
 import CountryCreate from "./CountryCreate";
 import CountryEdit from "./CountryEdit";
 import { Container, Button } from "@mui/material";
@@ -13,32 +13,25 @@ export default class CountryIndex extends React.Component {
     super(props);
     this.state = {
       countries: [],
-      open:false,
+      open: false,
       updatePressed: false,
       countryToUpdate: {},
       countryToReview: {},
-      reviewActive: false
+      reviewActive: false,
     };
   }
 
-
-
-
   countryDelete = (event) => {
-      console.log(event)
-      fetch(`${APIURL}/country/delete/${event.target.id}`, {
-          method:'DELETE',
-          body: JSON.stringify({data: {id: event.target.id} }),
-          headers: new Headers({
-              'Content-Type' : 'application/json',
-              'Authorization': this.props.sessionToken
-          })
-      })
-      .then((res)=> this.handleFetch())
-  }
-
-
-
+    console.log(event);
+    fetch(`${APIURL}/country/delete/${event.target.id}`, {
+      method: "DELETE",
+      body: JSON.stringify({ data: { id: event.target.id } }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    }).then((res) => this.handleFetch());
+  };
 
   setUpdateCountry = (country) => {
     this.setState({
@@ -49,9 +42,9 @@ export default class CountryIndex extends React.Component {
 
   setUpdatePressed = (boolean) => {
     this.setState({
-      updatePressed: boolean
-    })
-  } 
+      updatePressed: boolean,
+    });
+  };
 
   componentWillMount() {
     this.handleFetch();
@@ -63,22 +56,20 @@ export default class CountryIndex extends React.Component {
   };
 
   handleOpen = () => {
-      this.setState({open: true})
-  }
-
+    this.setState({ open: true });
+  };
 
   handleReviewOpen = () => {
-    this.setState({reviewActive: true})
-}
+    this.setState({ reviewActive: true });
+  };
 
-handleReviewClose = () => {
-  this.setState({reviewActive: false})
-}
-
+  handleReviewClose = () => {
+    this.setState({ reviewActive: false });
+  };
 
   reviewToCreate = (country) => {
-    this.setState({countryToReview: country})
-  }
+    this.setState({ countryToReview: country });
+  };
 
   handleFetch = () => {
     fetch(`${APIURL}/country/getAll`, {
@@ -95,7 +86,6 @@ handleReviewClose = () => {
       });
   };
 
-
   reviewDelete = (review) => {
     fetch(`${APIURL}/review/delete/${review.id}`, {
       method: "DELETE",
@@ -106,42 +96,55 @@ handleReviewClose = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ status: "Review Deleted" })
-        this.handleFetch()
-      })
+        this.setState({ status: "Review Deleted" });
+        this.handleFetch();
+      });
   };
 
+
+
+
+
   render() {
-    // const countries = this.state.countries.length >= 1 ?    
     return (
-        <div>
-            {/* <CountryTable countries={this.state.countries} 
-              update={this.setUpdatedCountry} />  */}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-     <Button onClick={() => this.handleOpen()}>Add Country</Button>
-     {/* <Button onClick={() => this.handleOpen()}>Edit Country</Button> */}
-     {/* <Button onClick={() => this.handleOpen()}>Delete Country</Button> */}
-          <Container>
-              {this.state.open ? 
-              <CountryCreate sessionToken={this.props.sessionToken} handleClose={this.handleClose.bind(this)} handleFetch={this.handleFetch} open={this.state.open} />
-              : <></>}
-          </Container>
-                <Container>
-                    {
-                         this.state.updatePressed ? <CountryEdit t={this.state.updatePressed} update={this.countryUpdate} country={this.state.countryToUpdate} setUpdatePressed={this.setUpdatePressed} sessionToken={this.props.sessionToken}/> 
-                         : <div></div>
-                    }
-                </Container>
-        <Switch> 
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <Button onClick={() => this.handleOpen()}>Add Country</Button>
+        <Container>
+          {this.state.open ? (
+            <CountryCreate
+              sessionToken={this.props.sessionToken}
+              handleClose={this.handleClose.bind(this)}
+              handleFetch={this.handleFetch}
+              open={this.state.open}
+            />
+          ) : (
+            <></>
+          )}
+        </Container>
+        <Container>
+          {this.state.updatePressed ? (
+            <CountryEdit
+              t={this.state.updatePressed}
+              update={this.countryUpdate}
+              country={this.state.countryToUpdate}
+              setUpdatePressed={this.setUpdatePressed}
+              sessionToken={this.props.sessionToken}
+            />
+          ) : (
+            <div></div>
+          )}
+        </Container>
+        <Switch>
           <Route exact path="/">
             <CountryTable
-            handleReviewOpen={this.handleReviewOpen}
-            reviewToCreate={this.reviewToCreate}
-            countryDelete={this.countryDelete}
+              handleReviewOpen={this.handleReviewOpen}
+              reviewToCreate={this.reviewToCreate}
+              countryDelete={this.countryDelete}
               token={this.props.sessionToken}
               t={this.state.updatePressed}
               update={this.countryUpdate}
@@ -154,14 +157,18 @@ handleReviewClose = () => {
               />
           </Route>
           <Route exact path="/SecondPage">
-            <SecondPage countries={this.state.countries} />
-          </Route>
+          <SecondPage countries={this.state.countries} />
+        </Route>
         </Switch>
         {this.state.reviewActive && (
-               <ReviewCreate sessionToken={this.props.sessionToken} countryToReview={this.state.countryToReview} handleFetch={this.handleFetch} handleReviewClose={this.handleReviewClose}/> 
+          <ReviewCreate
+            sessionToken={this.props.sessionToken}
+            countryToReview={this.state.countryToReview}
+            handleFetch={this.handleFetch}
+            handleReviewClose={this.handleReviewClose}
+          />
         )}
       </div>
-            //   </div>
     );
   }
 }

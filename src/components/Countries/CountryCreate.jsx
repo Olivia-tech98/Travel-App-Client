@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/material";
-import{Box, Modal, IconButton} from  "@mui/material";
+import { Box, Modal, IconButton} from "@mui/material";
 import APIURL from "../helpers/enviroment";
 // import Box from "@mui/material/Box";
 
@@ -10,7 +10,7 @@ class CountryCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    open: false,
+      open: false,
       countryName: "",
       population: "",
       history: "",
@@ -20,23 +20,22 @@ class CountryCreate extends React.Component {
     };
   }
 
-//   handleClickOpen = () => {
-//     this.setState({
-//       open: true,
-//     });
-//   };
-
+  //   handleClickOpen = () => {
+  //     this.setState({
+  //       open: true,
+  //     });
+  //   };
 
   handleFetch = (event) => {
-      console.log(event)
+    console.log(event);
     event.preventDefault();
     //surround this with a conditional that checks to see if the user is an admin or not.
-    console.log('hello')
+    console.log("hello");
     fetch(`${APIURL}/country/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': this.props.sessionToken
+        Authorization: this.props.sessionToken,
       },
       body: JSON.stringify({
         country: {
@@ -53,15 +52,15 @@ class CountryCreate extends React.Component {
       .then((data) => {
         console.log(data);
         // this.props.updateToken(data.sessionToken);
-        this.props.handleFetch()
-        this.props.handleClose()
+        this.props.handleFetch();
+        this.props.handleClose();
       })
       .catch((error) => console.log(error));
   };
 
   render() {
     return (
-        <Container>
+      <Container>
         <Modal
           open={this.props.open}
           aria-labelledby="simple-modal-title"
@@ -95,102 +94,101 @@ class CountryCreate extends React.Component {
                   right: 8,
                   top: 8,
                 }}
-                ></IconButton>
-
-            <TextField
-              autoFocus
-              value={this.state.countryName}
-              margin="dense"
-              onChange={(e) => this.setState({ countryName: e.target.value })}
-              id="title"
-              name="title"
-              label="Country Name"
-              type="text"
-              fullWidth
-              variant="outlined"
-              required
-            />
-            <TextField
-              fullWidth
-              value={this.state.population}
-              autoFocus
-              margin="dense"
-              // sx={{ m: 1, width: "60ch" }}
-              onChange={(e) => this.setState({ population: e.target.value })}
-              variant="outlined"
-              id="description"
-              name="description"
-              label="Population"
-              type="number"
-              multiline
-              rows={5}
-              required
-            ></TextField>
-            <TextField
-              fullWidth
-              value={this.state.history}
-              autoFocus
-              margin="dense"
-              // sx={{ m: 1, width: "60ch" }}
-              onChange={(e) => this.setState({ history: e.target.value })}
-              variant="outlined"
-              id="estimatedTime"
-              name="estimatedTime"
-              type="text"
-              label="History"
-              multiline
-              rows={5}
-              required
-            ></TextField>
-            <TextField
-              fullWidth
-              value={this.state.attractions}
-              autoFocus
-              margin="dense"
-              // sx={{ m: 1, width: "60ch" }}
-              onChange={(e) => this.setState({ attractions: e.target.value })}
-              variant="outlined"
-              id="tools"
-              name="tools"
-              label="Attractions"
-              type="text"
-              multiline
-              rows={5}
-              required
-            ></TextField>
-            <TextField
-              fullWidth
-              value={this.state.languages}
-              autoFocus
-              margin="dense"
-              // sx={{ m: 1, width: "60ch" }}
-              onChange={(e) => this.setState({ languages: e.target.value })}
-              variant="outlined"
-              id="directions"
-              name="directions"
-              label="Languages"
-              type="text"
-              multiline
-              rows={20}
-              required
-            ></TextField>
-            <TextField
-              fullWidth
-              value={this.state.safetyRates}
-              autoFocus
-              margin="dense"
-              // sx={{ m: 1, width: "60ch" }}
-              onChange={(e) => this.setState({ safetyRates: e.target.value })}
-              variant="outlined"
-              id="directions"
-              name="directions"
-              label="Safety Rates"
-              type="text"
-              multiline
-              rows={20}
-              required
-            ></TextField>
-            <div>
+              ></IconButton>
+              <TextField
+                autoFocus
+                value={this.state.countryName}
+                margin="dense"
+                onChange={(e) => this.setState({ countryName: e.target.value })}
+                id="title"
+                name="title"
+                label="Country Name"
+                type="text"
+                fullWidth
+                variant="outlined"
+                required
+              />
+              <TextField
+                fullWidth
+                value={this.state.population}
+                autoFocus
+                margin="dense"
+                // sx={{ m: 1, width: "60ch" }}
+                onChange={(e) => this.setState({ population: e.target.value })}
+                variant="outlined"
+                id="description"
+                name="description"
+                label="Population"
+                type="number"
+                multiline
+                rows={5}
+                required
+              ></TextField>
+              <TextField
+                fullWidth
+                value={this.state.history}
+                autoFocus
+                margin="dense"
+                // sx={{ m: 1, width: "60ch" }}
+                onChange={(e) => this.setState({ history: e.target.value })}
+                variant="outlined"
+                id="estimatedTime"
+                name="estimatedTime"
+                type="text"
+                label="History"
+                multiline
+                rows={5}
+                required
+              ></TextField>
+              <TextField
+                fullWidth
+                value={this.state.attractions}
+                autoFocus
+                margin="dense"
+                // sx={{ m: 1, width: "60ch" }}
+                onChange={(e) => this.setState({ attractions: e.target.value })}
+                variant="outlined"
+                id="tools"
+                name="tools"
+                label="Attractions"
+                type="text"
+                multiline
+                rows={5}
+                required
+              ></TextField>
+              <TextField
+                fullWidth
+                value={this.state.languages}
+                autoFocus
+                margin="dense"
+                // sx={{ m: 1, width: "60ch" }}
+                onChange={(e) => this.setState({ languages: e.target.value })}
+                variant="outlined"
+                id="directions"
+                name="directions"
+                label="Languages"
+                type="text"
+                multiline
+                rows={20}
+                required
+              ></TextField>
+              <TextField
+                fullWidth
+                value={this.state.safetyRates}
+                autoFocus
+                margin="dense"
+                // sx={{ m: 1, width: "60ch" }}
+                onChange={(e) => this.setState({ safetyRates: e.target.value })}
+                variant="outlined"
+                id="directions"
+                name="directions"
+                label="Safety Rates"
+                type="text"
+                multiline
+                rows={20}
+                required
+              ></TextField>
+              <div>
                 <Button
                   sx={{ mt: 4 }}
                   fullWidth
@@ -217,8 +215,7 @@ class CountryCreate extends React.Component {
         </Modal>
       </Container>
     );
-  }}
-
-    
+  }
+}
 
 export default CountryCreate;

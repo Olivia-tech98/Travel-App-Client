@@ -7,6 +7,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 // import HomeIndex from './components/HomeIndex/Home'
 import CountryIndex from "./components/Countries/CountryIndex"
 import Navbar from './components/HomeIndex/Navbar'
+import Footer from './components/HomeIndex/Footer'
 // import SecondPage from './components/HomeIndex/SecondPage'
 
 
@@ -41,6 +42,7 @@ class App extends React.Component {
           {this.state.sessionToken ? <CountryIndex sessionToken={this.state.sessionToken}/> : <Auth updateToken={this.updateToken}/>}
       </Router>
       <Navbar clearToken={this.state.clearToken}/>
+      <Footer />
       </div>
       )}
   }

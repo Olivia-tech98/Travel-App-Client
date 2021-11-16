@@ -21,7 +21,7 @@ class Navbar extends React.Component {
         <AppBar top="null">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Travel App
+              Traveler's Education
             </Typography>
             <Button href="/" onClick={()=> {
               this.clearToken();
