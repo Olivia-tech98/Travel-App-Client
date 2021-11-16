@@ -7,6 +7,7 @@ import CountryEdit from "./CountryEdit";
 import { Container, Button } from "@mui/material";
 import ReviewCreate from "../Reviews/ReviewCreate";
 import APIURL from "../helpers/enviroment";
+import ReviewEdit from "../Reviews/ReviewEdit";
 
 export default class CountryIndex extends React.Component {
   constructor(props) {
@@ -18,6 +19,8 @@ export default class CountryIndex extends React.Component {
       countryToUpdate: {},
       countryToReview: {},
       reviewActive: false,
+      reviewToUpdate: {},
+      reviewUpdateActive: false
     };
   }
 
@@ -63,12 +66,20 @@ export default class CountryIndex extends React.Component {
     this.setState({ reviewActive: true });
   };
 
+  handleReviewUpdateOpen = () => {
+    this.setState({ reviewUpdateActive: true });
+  };
+
   handleReviewClose = () => {
     this.setState({ reviewActive: false });
   };
 
   reviewToCreate = (country) => {
     this.setState({ countryToReview: country });
+  };
+
+  handleReviewUpdate = (review) => {
+    this.setState({ reviewToUpdate: review });
   };
 
   handleFetch = () => {
@@ -154,6 +165,10 @@ export default class CountryIndex extends React.Component {
               setUpdateCountry={this.setUpdateCountry}
               setUpdatePressed={this.setUpdatePressed}
               reviewDelete={this.reviewDelete}
+              handleReviewUpdate={this.handleReviewUpdate}
+              reviewToUpdate={this.state.reviewToUpdate}
+              handleReviewUpdateOpen={this.handleReviewUpdateOpen}
+
               />
           </Route>
           <Route exact path="/SecondPage">
@@ -167,6 +182,12 @@ export default class CountryIndex extends React.Component {
             handleFetch={this.handleFetch}
             handleReviewClose={this.handleReviewClose}
           />
+
+        )}
+        {this.state.reviewUpdateActive && (
+          <ReviewEdit
+          sessionToken={this.props.sessionToken}
+          reviewToUpdate={this.state.reviewToUpdate} />
         )}
       </div>
     );

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+// import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CountryCreate from "./CountryCreate";
@@ -21,7 +21,7 @@ export default class CountryTable extends React.Component {
     this.state = {};
   }
 
-  cards = [1, 2, 3, 4, 5, 6];
+  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   render() {
     return (
@@ -47,14 +47,14 @@ export default class CountryTable extends React.Component {
             <Card
               sx={{ height: "100%", display: "flex", flexDirection: "column" }}
             >
-              <CardMedia
+              {/* <CardMedia
                 component="img"
                 sx={{
                   pt: "5.25%",
                 }}
                 image="https://www.iabtravel.com/wp-content/uploads/2017/07/TURKEY-COUNTRY-IMAGE.jpg"
                 alt="random"
-              />
+              /> */}
               <Button
                 id={country.id}
                 onClick={(e) => this.props.countryDelete(e)}
@@ -84,7 +84,8 @@ export default class CountryTable extends React.Component {
                   <Box>
                     <p>{review.reviews}</p>
                     <Button onClick={()=> {
-                      this.props.reviewToUpdate(review)
+                      this.props.handleReviewUpdate(review)
+                      this.props.handleReviewUpdateOpen()
                     }}>Edit Review</Button>
                     <Button
                       onClick={() => {

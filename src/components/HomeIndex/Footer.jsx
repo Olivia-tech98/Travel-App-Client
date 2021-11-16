@@ -4,7 +4,7 @@ import {Typography, Link,} from '@mui/material'
 class Copyright extends React.Component {
     render () {
         return (
-            <Typography variant="body2" color="text.secondary" align="center">
+            <Typography variant="body2" color="text.secondary" align="center" position="relative" bottom="-200px">
               {'Copyright © '}
               <Link color="inherit" href="https://mui.com/">
                 Traveler's Education

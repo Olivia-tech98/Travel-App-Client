@@ -31,14 +31,14 @@ class ReviewEdit extends React.Component {
 
   componentWillMount() {
     this.setState({
-      reviews: this.props.workout.reviews,
-      favorites: this.props.workout.favorites,
+      reviews: this.props.reviewToUpdate.reviews,
+      favorites: this.props.reviewToUpdate.favorites,
     });
   }
 
 
-  reviewToUpdate = (review) => {
-    fetch(`${APIURL}/review/update/${this.props.countryToReviewUpdate.id}`, {
+  reviewToUpdate = () => {
+    fetch(`${APIURL}/review/update/${this.props.reviewToUpdate.id}`, {
       method: "PUT",
       body: JSON.stringify({
           review: {
@@ -50,7 +50,9 @@ class ReviewEdit extends React.Component {
         "Content-Type": "application/json",
         Authorization: this.props.sessionToken,
       }),
-    }).then((res) => {
+    }).then((res) => res.json())
+    .then((data)=>{
+      console.log(data)
       this.setState({ updatePressed: false });
       this.fetchReviews();
     });
