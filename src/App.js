@@ -37,7 +37,8 @@ class App extends React.Component {
 
   render (){
     return ( 
-      <div>
+      <div className="App">
+
       <Router>
           {this.state.sessionToken ? <CountryIndex sessionToken={this.state.sessionToken}/> : <Auth updateToken={this.updateToken}/>}
       </Router>

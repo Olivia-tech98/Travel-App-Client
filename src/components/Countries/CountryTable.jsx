@@ -21,7 +21,7 @@ export default class CountryTable extends React.Component {
     this.state = {};
   }
 
-  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  cards = [1, 2, 3, 4, 5, 6];
 
   render() {
     return (
@@ -41,11 +41,10 @@ export default class CountryTable extends React.Component {
             <div></div>
           )}
         </div>
-
         {this.props.countries.map((country) => (
           <Grid item key={country.id} xs={12} sm={6} md={4}>
-            <Card
-              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+            <Card 
+              sx={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#FFFAF0"}}
             >
               {/* <CardMedia
                 component="img"

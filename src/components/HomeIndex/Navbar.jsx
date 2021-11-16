@@ -17,15 +17,15 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1}}>
         <AppBar top="null">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" fontFamily="Open Sans" sx={{ flexGrow: 1 }}>
               Traveler's Education
             </Typography>
             <Button href="/" onClick={()=> {
               this.clearToken();
-            }} color="inherit">Logout</Button>
+            }} color="inherit" >Logout</Button>
           </Toolbar>
         </AppBar>
       </Box>
